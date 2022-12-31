@@ -7,9 +7,11 @@ module.exports = (sequelize, DataTypes) => {
          * This method is not a part of Sequelize lifecycle.
          * The `models/index` file will call this method automatically.
          */
-        static associate({round}) {
+        static associate({round,feedback,answer}) {
             // define association here
-            this.belongsTo(round,{foreignKey:{type: DataTypes.UUID,name:'round_id',as:'users'}})
+            this.belongsTo(round)
+            this.hasMany(feedback)
+            this.hasMany(answer)
         }
     }
     user.init(
@@ -24,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            roll_no: {
+            rollNo: {
                 type: DataTypes.STRING,
                 allowNull: true,
             },
@@ -38,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            profile_bool: {
+            profileBool: {
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
                 defaultValue: false,
@@ -54,13 +56,13 @@ module.exports = (sequelize, DataTypes) => {
                 defaultValue: "s",
             },
 
-            auth_mode: {
+            authMode: {
                 type: DataTypes.STRING,
                 allowNull: true,
                 defaultValue: "normal",
             },
 
-            end_time: {
+            endTime: {
                 type: DataTypes.BIGINT,
                 allowNull: false,
                 defaultValue: 0,
