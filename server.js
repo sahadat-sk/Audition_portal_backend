@@ -9,6 +9,7 @@ const errorHandler = require("./middlewares/errorHandler");
 const cluster = require("node:cluster");
 const numCPUs = require("node:os").cpus().length;
 const verifyJWT = require("./middlewares/verifyJWT")
+const verifyRoles = require("./middlewares/verifyRoles")
 // const process = require("node:process");
 
 app.use(cors());
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use("/auth", require("./routes/authRoutes"));
 
 app.use(verifyJWT);
+app.use(verifyRoles("su"));
 app.use("/protected",require("./routes/superUser"))
 
 

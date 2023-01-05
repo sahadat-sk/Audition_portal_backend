@@ -10,6 +10,7 @@ module.exports = (req, res, next) => {
         if (err) return res.sendStatus(403); //invalid token
         console.log(decoded);
         req.user = decoded;
+        req.role = decoded.role;
         next();
     });
 };
