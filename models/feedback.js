@@ -1,5 +1,5 @@
 "use strict";
-const { Model } = require("sequelize");
+const { Model, UUIDV4 } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
     class feedback extends Model {
         /**
@@ -14,7 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
     feedback.init(
         {
-            id: { type: DataTypes.UUID, primaryKey: true },
+            id: {
+                type: DataTypes.UUID,
+                defaultValue: UUIDV4,
+                primaryKey: true,
+            },
             text: { type: DataTypes.STRING, allowNull: false },
         },
         {

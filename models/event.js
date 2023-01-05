@@ -1,5 +1,5 @@
 "use strict";
-const { Model } = require("sequelize");
+const { Model,UUIDV4 } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
     class event extends Model {
         /**
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     }
     event.init(
         {
-            id: { type: DataTypes.UUID, primaryKey: true },
+            id: { type: DataTypes.UUID,defaultValue:UUIDV4 ,primaryKey: true },
             username: { type: DataTypes.STRING, allowNull: false },
             time: { type: DataTypes.DATE, allowNull: false },
             event: { type: DataTypes.STRING, allowNull: false },

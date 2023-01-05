@@ -1,5 +1,5 @@
 "use strict";
-const { Model } = require("sequelize");
+const { Model,UUIDV4 } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
     class question extends Model {
         /**
@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
     question.init(
         {
-            id: { type: DataTypes.UUID, primaryKey: true },
+            id: { type: DataTypes.UUID, defaultValue: UUIDV4,primaryKey: true, },
             text: { type: DataTypes.STRING, allowNull: true },
             imageLink: { type: DataTypes.STRING, allowNull: true },
             audioLink: { type: DataTypes.STRING, allowNull: true },

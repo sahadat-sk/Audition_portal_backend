@@ -19,8 +19,12 @@ app.use(cookieParser());
 app.use("/auth", require("./routes/authRoutes"));
 
 app.use(verifyJWT);
-app.use(verifyRoles("su"));
-app.use("/protected",require("./routes/superUser"))
+
+//round routes
+app.use("/protected",verifyRoles("su","m"),require("./routes/questionRoutes"))
+
+//routes for superuser
+app.use("/protected",verifyRoles("su"),require("./routes/superUser"))
 
 
 app.all("*", (req, res) => {
